@@ -7,14 +7,16 @@
   "license": "MIT",
   "dependencies": {
     "@types/canvas-multiline-text": "^1.0.0",
+    "@types/dotenv": "^8.2.0",
     "@types/node": "^18.0.6",
+    "@types/twit": "^2.2.30",
     "axios": "^0.27.2",
     "canvas": "^2.9.3",
     "canvas-multiline-text": "^1.0.3",
     "chalk": "4",
     "dotenv": "^16.0.1",
     "node-fetch": "^3.2.9",
-    "twitter-api-sdk": "^1.1.0"
+    "twit": "^2.2.11"
   },
   "devDependencies": {
     "@types/node-fetch": "^2.6.2"
