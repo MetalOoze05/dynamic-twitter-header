@@ -3,6 +3,7 @@
  */
 
 import puppeteer from "puppeteer";
+import chalk from "chalk";
 
 type ScreenshotProps = {
   width?: number;
@@ -18,14 +19,9 @@ export async function returnDynamicTemplateScreenshot({
   height = 900,
   quote,
   author,
-  save = false,
   path,
 }: ScreenshotProps) {
   let browser = await puppeteer.launch();
-
-  if (save && !path) {
-    return console.log("No path has been specified.");
-  }
 
   console.log("Browser loaded.");
   let page = await browser.newPage();
@@ -37,17 +33,22 @@ export async function returnDynamicTemplateScreenshot({
   });
 
   const template = `
-             <i>${quote}</i> ~ <b>${author}</b>
+            <div id="screenshotThis">
+            <i>${quote}</i> ~ <b>${author}</b>
+            </div>
          `; // Set any arbitrary template
 
   await page.setContent(template);
   console.log("Template set.");
 
-  const screenshot = await page.screenshot({
+  await page.waitForSelector("#screenshotThis");
+  const element = await page.$("#screenshotThis");
+
+  const screenshot = await element.screenshot({
     type: "jpeg",
-    path: save ? path : null,
+    path: path,
   });
-  console.log("Screenshot saved.");
+  console.log(chalk.greenBright("Screenshot saved."));
 
   await browser.close();
 
