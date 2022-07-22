@@ -3,7 +3,6 @@
       "target": "es2022",
       "lib": ["es6", "ES2021", "ES2022"],
       "esModuleInterop": true,
-      "module": "ESNext",
       "moduleResolution": "Node",
     },
     "ts-node": {

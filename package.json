@@ -16,6 +16,7 @@
     "chalk": "4",
     "dotenv": "^16.0.1",
     "node-fetch": "^3.2.9",
+    "puppeteer": "^15.5.0",
     "twit": "^2.2.11"
   },
   "devDependencies": {
