@@ -27,35 +27,29 @@ export async function returnDynamicTemplateScreenshot({
     return console.log("No path has been specified.");
   }
 
-  try {
-    console.log("Browser loaded.")
-    let page = await browser.newPage();
-    console.log("Page Loaded.")
+  console.log("Browser loaded.");
+  let page = await browser.newPage();
+  console.log("Page Loaded.");
 
-    await page.setViewport({
-      width: width,
-      height: height,
-    });
+  await page.setViewport({
+    width: width,
+    height: height,
+  });
 
-    const template = `
+  const template = `
              <i>${quote}</i> ~ <b>${author}</b>
          `; // Set any arbitrary template
 
-    await page.setContent(template);
-    console.log("Template set.")
+  await page.setContent(template);
+  console.log("Template set.");
 
-    const screenshot = await page.screenshot({
-      type: "jpeg",
-      path: save ? path : null,
-    });
-    console.log("Screenshot saved.")
+  const screenshot = await page.screenshot({
+    type: "jpeg",
+    path: save ? path : null,
+  });
+  console.log("Screenshot saved.");
 
-    await browser.close();
+  await browser.close();
 
-    return screenshot;
-  } catch (err) {
-    throw new Error(err, {
-      cause: err,
-    });
-  }
+  return screenshot;
 }
