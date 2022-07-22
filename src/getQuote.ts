@@ -1,6 +1,6 @@
 import axios from "axios"
 
-interface QuoteData {
+type QuoteData = {
     _id: string,
     text: string,
     author: string
