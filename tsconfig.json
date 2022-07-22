@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-      "module": "esnext",
+      "module": "esnext", // don't revert this
       "target": "es2022",
       "lib": ["es6", "ES2021", "ES2022"],
       "esModuleInterop": true,
