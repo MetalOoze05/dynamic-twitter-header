@@ -1,5 +1,5 @@
 import chalk from "chalk"
-import { getQuote } from "./getQuote"
+import { getQuote } from "./getQuote.js"
 import { createCanvas, registerFont } from "canvas"
 import drawMultilineText from "canvas-multiline-text"
 import type { WriteStream } from "node:fs"
