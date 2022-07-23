@@ -1,17 +1,16 @@
 import axios from "axios"
 
-interface QuoteData {
+type QuoteData = {
     _id: string,
     text: string,
     author: string
 }
 
-export function getQuote(): Promise<QuoteData> {
-    return axios({
+export async function getQuote(): Promise<QuoteData> {
+    const res = await axios({
         method: "get",
         url: "https://winterly-backend.herokuapp.com/quote",
         responseType: "json"
-    }).then((res) => {
-        return res.data as QuoteData
     })
+    return res.data as QuoteData
 }

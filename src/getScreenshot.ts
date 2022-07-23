@@ -3,6 +3,7 @@
  */
 
 import puppeteer from "puppeteer";
+import chalk from "chalk";
 
 type ScreenshotProps = {
   width?: number;
@@ -18,44 +19,38 @@ export async function returnDynamicTemplateScreenshot({
   height = 900,
   quote,
   author,
-  save = false,
   path,
 }: ScreenshotProps) {
   let browser = await puppeteer.launch();
 
-  if (save && !path) {
-    return console.log("No path has been specified.");
-  }
+  console.log("Browser loaded.");
+  let page = await browser.newPage();
+  console.log("Page Loaded.");
 
-  try {
-    console.log("Browser loaded.")
-    let page = await browser.newPage();
-    console.log("Page Loaded.")
+  await page.setViewport({
+    width: width,
+    height: height,
+  });
 
-    await page.setViewport({
-      width: width,
-      height: height,
-    });
-
-    const template = `
-             <i>${quote}</i> ~ <b>${author}</b>
+  const template = `
+            <div id="screenshotThis">
+            <i>${quote}</i> ~ <b>${author}</b>
+            </div>
          `; // Set any arbitrary template
 
-    await page.setContent(template);
-    console.log("Template set.")
+  await page.setContent(template);
+  console.log("Template set.");
 
-    const screenshot = await page.screenshot({
-      type: "jpeg",
-      path: save ? path : null,
-    });
-    console.log("Screenshot saved.")
+  await page.waitForSelector("#screenshotThis");
+  const element = await page.$("#screenshotThis");
 
-    await browser.close();
+  const screenshot = await element.screenshot({
+    type: "jpeg",
+    path: path,
+  });
+  console.log(chalk.greenBright("Screenshot saved."));
 
-    return screenshot;
-  } catch (err) {
-    throw new Error(err, {
-      cause: err,
-    });
-  }
+  await browser.close();
+
+  return screenshot;
 }
