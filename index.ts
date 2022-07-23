@@ -2,7 +2,7 @@ import * as dotenv from "dotenv";
 import Twit from "twit";
 import chalk from "chalk";
 import fs from "node:fs";
-import { renderHeader } from "./src/renderHeader";
+import { renderHeader } from "./src/renderHeader.js";
 
 dotenv.config();
 
