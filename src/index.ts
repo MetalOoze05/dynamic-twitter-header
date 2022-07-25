@@ -3,6 +3,8 @@ import Twit from "twit";
 import chalk from "chalk";
 import fs from "node:fs";
 import { renderHeader } from "./utils/renderHeader.js";
+import path from "path";
+import { fileURLToPath } from "node:url";
 
 dotenv.config();
 
@@ -15,6 +17,8 @@ const twitter = new Twit({
   strictSSL: true,
 });
 
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 const out = fs.createWriteStream(__dirname + "/out.png");
 
 (async () => {
