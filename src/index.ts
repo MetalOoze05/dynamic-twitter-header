@@ -30,24 +30,13 @@ const out = fs.createWriteStream(__dirname + "/out.png");
     encoding: "base64",
   });
 
-  twitter.post(
-    "media/upload",
-    { media_data: fileToBase64String },
-    (err, data: any, response) => {
-      let media_id = data.media_id_string;
-      twitter.post(
-        "account/update_profile_banner",
-        { media_id: media_id },
-        (err, data, response) => {
-          if (err) {
-            console.error(err);
-          } else {
-            console.log(chalk.green("Updated twitter header!"));
-          }
-        }
-      );
-    }
-  );
+  twitter.post("media/upload", { media_data: fileToBase64String }, (err: any, data: any, response: any) => {
+    let media_id = data.media_id_string;
+    twitter.post("account/update_profile_banner", { media_id: media_id }, (err: any, data: any, response: any) => {
+      if (err) console.error(err);
+      else console.log(chalk.green("Updated twitter header!"));
+    })
+  })
 })();
 
 out.on("finish", () => console.log(chalk.green("Finished saving the png!")));

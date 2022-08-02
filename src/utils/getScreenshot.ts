@@ -4,15 +4,7 @@
 
 import puppeteer from "puppeteer";
 import chalk from "chalk";
-
-type ScreenshotProps = {
-  width?: number;
-  height?: number;
-  quote: string;
-  author: string;
-  save?: boolean;
-  path?: string;
-};
+import { ScreenshotProps } from "../@types/ScreenshotProps";
 
 export async function returnDynamicTemplateScreenshot({
   width = 1600,

@@ -1,10 +1,5 @@
 import axios from "axios"
-
-type QuoteData = {
-    _id: string,
-    text: string,
-    author: string
-}
+import { QuoteData } from "../@types/QuoteData"
 
 export async function getQuote(): Promise<QuoteData> {
     const res = await axios({
